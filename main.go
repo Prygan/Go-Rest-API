@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/Prygan/Go-Rest-API/handlers"
 	"log"
 	"net/http"
+
+	"github.com/prygan/Go-Rest-API/handlers"
 )
 
 func main() {
