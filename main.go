@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/kevin/Go-Rest-API/handlers"
+	"github.com/prygan/Go-Rest-API/handlers"
 	"log"
 	"net/http"
 )

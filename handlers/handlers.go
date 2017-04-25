@@ -11,6 +11,7 @@ import (
 func HandlerOutings(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		w.WriteHeader(http.StatusOK)
+		w.Header().Set("Content-Type", "application/json")
 		outings := utils.ReadJSON("data/outings.json")
 
 		o, _ := json.Marshal(outings)
