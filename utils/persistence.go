@@ -2,9 +2,8 @@ package utils
 
 import (
 	"encoding/json"
-	"io/ioutil"
-
 	"github.com/prygan/Go-Rest-API/models"
+	"io/ioutil"
 )
 
 func ReadJSON(filename string) []models.Outing {
