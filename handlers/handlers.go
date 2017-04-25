@@ -23,17 +23,18 @@ func newOuting(name string, address string, city string) *outing {
 	}
 }
 
-func GetOutings(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "GET" {
-		errorHandler(w, r, http.StatusNotFound)
+func HandlerOutings(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "GET" {
+		w.WriteHeader(http.StatusOK)
+		outing := newOuting("sortie ouf", "qq part", "nantes")
+		o, _ := json.Marshal(outing)
+		fmt.Fprintf(w, string(o))
+		return
+	} else if r.Method == "POST" {
+		fmt.Println(r.Body)
 		return
 	}
-	w.WriteHeader(http.StatusOK)
-	outing := newOuting("sortie ouf", "qq part", "nantes")
-
-	o, _ := json.Marshal(outing)
-
-	fmt.Fprintf(w, string(o))
+	errorHandler(w, r, http.StatusNotFound)
 }
 
 func errorHandler(w http.ResponseWriter, r *http.Request, status int) {
