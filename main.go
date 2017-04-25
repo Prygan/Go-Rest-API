@@ -10,10 +10,10 @@ import (
 )
 
 type outing struct {
-	ID     string `json:"id"`
-	Name   string `json:"name"`
-	Adress string `json:adress`
-	City   string `json:city`
+	ID      string `json:"id"`
+	Name    string `json:"name"`
+	Address string `json:"address"`
+	City    string `json:"city"`
 }
 
 func main() {
@@ -21,12 +21,12 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
-func newOuting(name string, adress string, city string) *outing {
+func newOuting(name string, address string, city string) *outing {
 	return &outing{
-		ID:     uuid.NewV4().String(),
-		Name:   name,
-		Adress: adress,
-		City:   city,
+		ID:      uuid.NewV4().String(),
+		Name:    name,
+		Address: address,
+		City:    city,
 	}
 }
 
