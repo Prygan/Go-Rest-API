@@ -1,0 +1,203 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "An API for keeping track of your outing. \n\nDon't forget to take it for a spin by clicking on the **Try in Client** button next to each operation! All read operations are public and don't require authentication.\n\n<!-- ![](https://thecontactsapi.apispark.net/v1/img/cropped-contact-img.png) -->\n\n",
+    "version" : "1.0.0",
+    "title" : "Outings API",
+    "termsOfService" : "",
+    "contact" : { }
+  },
+  "host" : "thecontactsapi.restlet.net",
+  "basePath" : "/v1",
+  "schemes" : [ "https" ],
+  "consumes" : [ "application/json" ],
+  "produces" : [ "application/json" ],
+  "security" : [ {
+    "HTTP_BASIC" : [ ]
+  } ],
+  "paths" : {
+    "/outings/" : {
+      "get" : {
+        "tags" : [ "Outing" ],
+        "summary" : "Get the list of Outings",
+        "description" : "Loads a list of Outings",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "$ref" : "#/definitions/Outing"
+              },
+              "example" : "[{\n  \"id\": \"0e8dd830-ad98-11e6-bf2e-47644ada7c0f\",\n  \"name\": \"Piscine\",\n  \"address\": \"2 rue jean moulin\",\n  \"city\": \"Carquefou\",\n}]"
+            },
+            "examples" : {
+              "application/json" : "[{\n  \"id\": \"0e8dd830-ad98-11e6-bf2e-47644ada7c0f\",\n  \"name\": \"Piscine\",\n  \"address\": \"2 rue jean moulin\",\n  \"city\": \"Carquefou\",\n}]"
+            }
+          },
+          "400" : {
+            "description" : "Status 400",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Outing" ],
+        "summary" : "Create an outing",
+        "description" : "Adds an Outing",
+        "consumes" : [ ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Outing"
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "Status 201 - Created",
+            "schema" : {
+              "$ref" : "#/definitions/Outing"
+            },
+            "examples" : {
+              "application/json" : "{\n  \"id\": \"0e8dd830-ad98-11e6-bf2e-47644ada7c0f\",\n  \"name\": \"Bar Fabrik à jeu\",\n  \"address\": \"1Bis Quai Turenne\",\n  \"city\": \"Nantes\"\n}"
+            }
+          }
+        }
+      }
+    },
+    "/outings/{outingid}" : {
+      "get" : {
+        "tags" : [ "Outing" ],
+        "summary" : "Load an individual Outing",
+        "description" : "Loads a Outing",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/Outing"
+            },
+            "examples" : {
+              "application/json" : "{\n  \"id\": \"0e8dd830-ad98-11e6-bf2e-47644ada7c0f\",\n  \"name\": \"Bar Fabrik à jeu\",\n  \"address\": \"1Bis Quai Turenne\",\n  \"city\": \"Nantes\"\n}"
+            }
+          },
+          "400" : {
+            "description" : "Status 400",
+            "schema" : {
+              "$ref" : "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Outing" ],
+        "summary" : "Update an Outing",
+        "description" : "Stores an Outing",
+        "consumes" : [ ],
+        "parameters" : [ {
+          "name" : "body",
+          "in" : "body",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/Outing"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "schema" : {
+              "$ref" : "#/definitions/Outing"
+            },
+            "examples" : {
+              "application/json" : "{\n  \"id\": \"0e8dd830-ad98-11e6-bf2e-47644ada7c0f\",\n  \"name\": \"Bar Fabrik à jeu\",\n  \"address\": \"1Bis Quai Turenne\",\n  \"city\": \"Nantes\"\n}"
+            }
+          },
+          "400" : {
+            "description" : "Error 400"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Outing" ],
+        "summary" : "Delete an Outing",
+        "description" : "Deletes an Outing",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Status 200"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "outingid",
+        "in" : "path",
+        "required" : true,
+        "type" : "string",
+        "description" : "Identifier of the Outing",
+        "x-example" : "0e8dd830-ad98-11e6-bf2e-47644ada7c0f"
+      } ]
+    }
+  },
+  "securityDefinitions" : {
+    "HTTP_BASIC" : {
+      "description" : "All methods are public, meaning that *you can read all the data*.",
+      "type" : "basic"
+    }
+  },
+  "definitions" : {
+    "Error" : {
+      "type" : "object",
+      "required" : [ "code" ],
+      "properties" : {
+        "code" : {
+          "type" : "integer",
+          "minimum" : 400,
+          "maximum" : 599
+        },
+        "description" : {
+          "type" : "string",
+          "example" : "Bad query parameter [$size]: Invalid integer value [abc]"
+        },
+        "reasonPhrase" : {
+          "type" : "string",
+          "example" : "Bad Request"
+        }
+      },
+      "description" : "This general error structure is used throughout this API.",
+      "example" : "{\n  \"code\": 400,\n  \"description\": \"Bad query parameter [$size]: Invalid integer value [abc]\",\n  \"reasonPhrase\": \"Bad Request\"\n}"
+    },
+    "Outing" : {
+      "type" : "object",
+      "required" : [ "address", "city", "id", "name" ],
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "Auto-generated primary key field",
+          "example" : "0e8ffb10-ad98-11e6-bf2e-47644ada7c0f"
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "name of the outing",
+          "example" : "Bowling"
+        },
+        "address" : {
+          "type" : "string",
+          "description" : "address of the outing",
+          "example" : "1Bis Quai Turenne"
+        },
+        "city" : {
+          "type" : "string",
+          "description" : "city of the outing",
+          "example" : "Nantes"
+        }
+      },
+      "description" : "A representation of a Outing.",
+      "example" : "{\n  \"id\": \"0e8dd830-ad98-11e6-bf2e-47644ada7c0f\",\n  \"name\": \"Golf\",\n  \"address\": \"18 rue des mocassins\",\n  \"city\": \"Nantes\",\n}"
+    }
+  }
+}
